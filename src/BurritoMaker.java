@@ -1,8 +1,17 @@
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class BurritoMaker {
+    static int whiteRiceCounter = 0, brownRiceCounter = 0,
+            chickenCounter = 0, steakCounter = 0, carnitasCounter = 0, chorizoCounter = 0, sofritasCounter = 0, veggiesCounter = 0,
+            pintoCounter = 0, blackBeanCounter = 0,
+            mildSalsaCounter = 0, mediumSalsaCounter = 0, hotSalsaCounter = 0,
+            lettuceCounter = 0, fajitaVeggCounter = 0,
+            cheeseCounter = 0, guacCounter = 0, quesoCounter = 0, sourCreamCounter = 0;
+    static double totalPrice = 0.0;
+
     public static void main(String[] args) {
         System.out.println("Price guide: base burrito is $3.00, EACH additional item is $0.50.\nFor more than one item per category (e.g. \"white & brown rice\"), you will be charged individually for each item ($1.00).\n");
         String[] burritos = new String[25];
@@ -12,6 +21,25 @@ public class BurritoMaker {
         for (int i=0; i<25; i++) {
             System.out.println(burritos[i]);
         }
+
+        String countedItems = "This order has " + whiteRiceCounter + " white rice, " + brownRiceCounter + " brown rice, " + chickenCounter
+                + " chicken, " + steakCounter + " steak, " + carnitasCounter + " carnitas, " + chorizoCounter + " chorizos, " + sofritasCounter
+                + " sofritas, " + veggiesCounter + " veggies(as a meat option), " + blackBeanCounter + " black beans, " + pintoCounter
+                + " pinto beans, " + mildSalsaCounter + " mild salsas, " + mediumSalsaCounter + " medium salsas, " + hotSalsaCounter + " hot salsas, "
+                + fajitaVeggCounter + " fajitas, " + lettuceCounter + " lettuce, " + cheeseCounter + " cheese, "
+                + guacCounter + " guac, " + quesoCounter + " quesos, " + sourCreamCounter + " sour cream, and the sum is $"
+                + totalPrice;
+
+        System.out.println(countedItems);
+        String formattedReceipt1 = "";
+
+        for (int i = 0; i<countedItems.length(); i++) {
+            if (i % 50 == 0) {
+                System.out.println();
+            }
+            System.out.print(countedItems.charAt(i));
+        }
+
     }
 
 
@@ -31,40 +59,111 @@ public class BurritoMaker {
 
         // price controller
         if (rice.equals("white rice") || rice.equals("brown rice")) {
+            if (rice.equals("white rice")){
+                whiteRiceCounter++;
+            }
+            if (rice.equals("brown rice")){
+                brownRiceCounter++;
+            }
+
             price += .5;
         }
         if (rice.equals("white & brown rice")) {
+            whiteRiceCounter++;
+            brownRiceCounter++;
             price += 1.0;
         }
         if (meat.equals("chicken") || meat.equals("steak") || meat.equals("carnitas") || meat.equals("chorizo")
         || meat.equals("sofritas") || meat.equals("veggies")){
+            if (meat.equals("chicken")) {
+                chickenCounter++;
+            }
+            if (meat.equals("steak")) {
+                steakCounter++;
+            }
+            if (meat.equals("carnitas")) {
+                carnitasCounter++;
+            }
+            if (meat.equals("chorizo")) {
+                chorizoCounter++;
+            }
+            if (meat.equals("sofritas")) {
+                sofritasCounter++;
+            }
+            if (meat.equals("veggies")) {
+                veggiesCounter++;
+            }
             price += .5;
         }
         if (meat.equals("chk, stk, crn, chz, sfr, vggs")) {
             price += 3.0;
+            chickenCounter++;
+            steakCounter++;
+            carnitasCounter++;
+            chorizoCounter++;
+            sofritasCounter++;
+            veggiesCounter++;
         }
         if (beans.equals("pinto beans") || beans.equals("black beans")) {
+            if (beans.equals("pinto beans")) {
+                pintoCounter++;
+            }
+            if (beans.equals("black beans")) {
+                blackBeanCounter++;
+            }
             price += .5;
         }
         if (salsa.equals("mild salsa") || salsa.equals("medium salsa") || salsa.equals("hot salsa")){
+            if (salsa.equals("mild salsa")) {
+                mildSalsaCounter++;
+            }
+            if (salsa.equals("medium salsa")) {
+                mediumSalsaCounter++;
+            }
+            if (salsa.equals("hot salsa")) {
+                hotSalsaCounter++;
+            }
             price += .5;
         }
         if (salsa.equals("mild, medium and hot salsa")) {
             price += 1.5;
+            mildSalsaCounter++;
+            mediumSalsaCounter++;
+            hotSalsaCounter++;
         }
         if (veggies.equals("lettuce") || veggies.equals("fajita veggies")) {
+            if (veggies.equals("lettuce")) {
+                lettuceCounter++;
+            }
+            if (veggies.equals("fajita veggies")) {
+                fajitaVeggCounter++;
+            }
             price += .5;
         }
         if (veggies.equals("lettuce and f.veggies")) {
             price += 1.0;
+            lettuceCounter++;
+            fajitaVeggCounter++;
         }
-        if (cheese.equals("cheese")) {price += .5;}
-        if (guac.equals("guac")) {price += .5;}
-        if (queso.equals("queso")) {price += .5;}
-        if (sourCream.equals("sour cream")) {price += .5;}
+        if (cheese.equals("cheese")) {
+            price += .5;
+            cheeseCounter++;
+        }
+        if (guac.equals("guac")) {
+            price += .5;
+            guacCounter++;
+        }
+        if (queso.equals("queso")) {
+            price += .5;
+            quesoCounter++;
+        }
+        if (sourCream.equals("sour cream")) {
+            price += .5;
+            sourCreamCounter++;
+        }
 
 
-
+        totalPrice += price;
 
         String burrito = rice + ", " + meat + ", " + beans + ", " + salsa + ", " + veggies + ", "
                 + cheese + ", " + guac + ", " + queso + ", " + sourCream + "\tPrice: " + currency.format(price);
