@@ -1,9 +1,10 @@
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class BurritoMaker {
+
+    static int j;
     static int whiteRiceCounter = 0, brownRiceCounter = 0,
             chickenCounter = 0, steakCounter = 0, carnitasCounter = 0, chorizoCounter = 0, sofritasCounter = 0, veggiesCounter = 0,
             pintoCounter = 0, blackBeanCounter = 0,
@@ -30,15 +31,47 @@ public class BurritoMaker {
                 + guacCounter + " guac, " + quesoCounter + " quesos, " + sourCreamCounter + " sour cream, and the sum is $"
                 + totalPrice;
 
-        System.out.println(countedItems);
-        String formattedReceipt1 = "";
-
+        System.out.println("The counted items: " + "\n" + countedItems);
+        // part 4 solution
         for (int i = 0; i<countedItems.length(); i++) {
             if (i % 50 == 0) {
                 System.out.println();
             }
             System.out.print(countedItems.charAt(i));
         }
+
+        System.out.println("\n\n\n");
+
+        // part 5 solution
+        String[] testArray = countedItems.split(" ");
+//        System.out.println("test array length " + testArray.length);
+//        System.out.println(testArray[0]);// I can use testArray[0].length() to see if it will exceed the 50 char limit
+        String formattedReceipt = "";
+//        static int j = 0;
+        int lineLimit = 50;
+        for (j = 0; j < testArray.length; j++) {
+            if (testArray[j].length() + formattedReceipt.length() > lineLimit) {
+                formattedReceipt += "\n";
+                formattedReceipt += testArray[j] + " ";
+                lineLimit += 50;
+            }
+            else {
+                formattedReceipt += testArray[j] + " ";
+            }
+        }
+//        System.out.println("j is at " + j);
+        System.out.println(formattedReceipt);
+
+
+
+
+        char[] itemsArray = new char[countedItems.length()];
+        itemsArray = countedItems.toCharArray();
+
+        for (int i = 0; i < itemsArray.length; i++) {
+            System.out.print(itemsArray[i]);
+        }
+
 
     }
 
