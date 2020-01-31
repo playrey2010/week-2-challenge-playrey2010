@@ -3,8 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class BurritoMaker {
-
-    static int j;
+    static NumberFormat currency = NumberFormat.getCurrencyInstance();
     static int whiteRiceCounter = 0, brownRiceCounter = 0,
             chickenCounter = 0, steakCounter = 0, carnitasCounter = 0, chorizoCounter = 0, sofritasCounter = 0, veggiesCounter = 0,
             pintoCounter = 0, blackBeanCounter = 0,
@@ -14,7 +13,10 @@ public class BurritoMaker {
     static double totalPrice = 0.0;
 
     public static void main(String[] args) {
-        System.out.println("Price guide: base burrito is $3.00, EACH additional item is $0.50.\nFor more than one item per category (e.g. \"white & brown rice\"), you will be charged individually for each item ($1.00).\n");
+        System.out.println("Price guide: base burrito is $3.00, EACH additional item is $0.50.\nFor more than one item per category" +
+                " (e.g. \"white & brown rice\"), you will be charged individually for each item ($1.00).\n");
+
+        // Part 1 solution -- create an array, loop through them
         String[] burritos = new String[25];
         for (int i=0; i<25; i++) {
             burritos[i] = "Burrito " + (i+1) + ": "+ burritoMaker() + "\n";
@@ -28,8 +30,8 @@ public class BurritoMaker {
                 + " sofritas, " + veggiesCounter + " veggies(as a meat option), " + blackBeanCounter + " black beans, " + pintoCounter
                 + " pinto beans, " + mildSalsaCounter + " mild salsas, " + mediumSalsaCounter + " medium salsas, " + hotSalsaCounter + " hot salsas, "
                 + fajitaVeggCounter + " fajitas, " + lettuceCounter + " lettuce, " + cheeseCounter + " cheese, "
-                + guacCounter + " guac, " + quesoCounter + " quesos, " + sourCreamCounter + " sour cream, and the sum is $"
-                + totalPrice;
+                + guacCounter + " guac, " + quesoCounter + " quesos, " + sourCreamCounter + " sour cream, and the sum is "
+                + currency.format(totalPrice) + ".";
 
         System.out.println("The counted items: " + "\n" + countedItems);
         // part 4 solution
@@ -49,7 +51,7 @@ public class BurritoMaker {
         String formattedReceipt = "";
 //        static int j = 0;
         int lineLimit = 50;
-        for (j = 0; j < testArray.length; j++) {
+        for (int j = 0; j < testArray.length; j++) {
             if (testArray[j].length() + formattedReceipt.length() > lineLimit) {
                 formattedReceipt += "\n";
                 formattedReceipt += testArray[j] + " ";
@@ -62,15 +64,6 @@ public class BurritoMaker {
 //        System.out.println("j is at " + j);
         System.out.println(formattedReceipt);
 
-
-
-
-        char[] itemsArray = new char[countedItems.length()];
-        itemsArray = countedItems.toCharArray();
-
-        for (int i = 0; i < itemsArray.length; i++) {
-            System.out.print(itemsArray[i]);
-        }
 
 
     }
@@ -87,7 +80,7 @@ public class BurritoMaker {
         String queso = quesoPicker();
         String sourCream = sourCreamPicker();
         double price = 3.0;
-        NumberFormat currency = NumberFormat.getCurrencyInstance();
+
 
 
         // price controller
